@@ -1,6 +1,8 @@
 package br.ucsal;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,8 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-	private String print;
 	
     public LoginServlet() {
         super();
@@ -23,14 +23,12 @@ public class LoginServlet extends HttpServlet {
 		String login = request.getParameter("login");
 		String password = request.getParameter("password");
 		
-		if(login.equals(password))
-			print = "Successful login";
+		if(login.equals(password)) {
+			RequestDispatcher dispatcher =  request.getRequestDispatcher("dashboard.jsp");
+			dispatcher.forward(request, response);
+		}
 		else
-			print= "Incorrect username or password";
-		
-		response.getWriter().append("<html><body>");
-		response.getWriter().append(print);
-		response.getWriter().append("</html></body>");
+			response.sendRedirect("login.jsp?erro=Access Denied");
 	}
 
 }

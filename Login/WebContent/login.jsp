@@ -7,10 +7,10 @@
 <title>Login</title>
 </head>
 <body>
-<% if(request.getParameter("login").equals(request.getParameter("password")))
-	out.print("Successful login");
-else
-	out.print("Incorrect username or password");
-%>
+<form action="LoginServlet" method="post">
+<input type="text"  name="login" placeholder="User Name">
+<input type="password" name="password" placeholder="Password">
+<button type="submit">Confirm</button>
+</form>
 </body>
 </html>
